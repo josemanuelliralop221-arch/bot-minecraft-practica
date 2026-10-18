@@ -1,0 +1,13 @@
+{
+  "name": "bot-minecraft-practica",
+  "version": "1.0.0",
+  "description": "Bot de Minecraft para servidores no premium (offline-mode) hecho con Mineflayer",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "mineflayer": "^4.0.0",
+    "mineflayer-pathfinder": "^2.4.0"
+  }
+}
