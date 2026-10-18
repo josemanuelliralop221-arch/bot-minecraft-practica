@@ -1,0 +1,43 @@
+name: Ejecutar bot de Minecraft
+
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: 'IP o dominio del servidor'
+        required: true
+      port:
+        description: 'Puerto'
+        required: false
+        default: '25565'
+      user:
+        description: 'Nombre del bot'
+        required: false
+        default: 'BotPractica'
+      version:
+        description: 'Versión (vacío = automático)'
+        required: false
+        default: ''
+
+concurrency:
+  group: minecraft-bot
+  cancel-in-progress: true
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - name: Iniciar bot
+        env:
+          MC_HOST: ${{ inputs.host }}
+          MC_PORT: ${{ inputs.port }}
+          MC_USER: ${{ inputs.user }}
+          MC_VERSION: ${{ inputs.version }}
+          MC_PASS: ${{ secrets.MC_PASS }}
+        run: npm start
